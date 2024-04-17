@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="my.finaltest.first.board.dao.BoardDAO">
+
+	<!-- 회원 리스트 -->
+	<select id="listOri" resultType="my.finaltest.first.board.dto.BoardDTO">
+		SELECT
+			(SELECT COUNT(new_filename) 
+			 FROM photo p 
+			 WHERE idx = b.idx) AS img_cnt,
+			b.idx , b.subject , b.user_name , b.bHit , b.reg_date
+		FROM bbs b
+		ORDER by b.idx desc
+		LIMIT 10 OFFSET 0
+	</select>
+	<select id="list" resultType="my.finaltest.first.board.dto.BoardDTO">
+		SELECT
+			(SELECT COUNT(new_filename) 
+			 FROM photo p 
+			 WHERE idx = b.idx) AS img_cnt,
+			b.idx , b.subject , b.user_name , b.bHit , b.reg_date
+		FROM bbs b
+		ORDER by b.idx desc
+		LiMIT #{param1} OFFSET #{param2}
+	</select>
+	<!-- 총 페이지 개수 -->
+	<select id="allCount" resultType="int">
+		SELECT CEIL(COUNT(idx)/#{param1}) FROM bbs
+	</select>
+	
+	
+	<!-- 글 상세보기 -->
+	<!-- 해당 글 조회수 up -->
+	<update id="upHit">
+		UPDATE bbs SET bHit = bHit+1 WHERE idx = #{param1}
+	</update>
+	<!-- 글 -->
+	<select id="detail" resultType="my.finaltest.first.board.dto.BoardDTO">
+		SELECT subject, idx, user_name, bHit, reg_date, content
+		FROM bbs
+		WHERE idx = #{param1}
+	</select>
+	<!-- 해당 글의 사진 -->
+	<select id="detailFile" resultType="my.finaltest.first.board.dto.BoardDTO">
+		SELECT new_filename
+		FROM photo
+		WHERE idx = #{param1}
+	</select>
+	
+	
+	<!-- 글 작성 -->
+	<!-- bbs 테이블 -->
+	<insert id="write"
+	 useGeneratedKeys="true"
+   	 keyColumn="idx"
+   	 keyProperty="idx"
+	 parameterType="my.finaltest.first.board.dto.BoardDTO">
+		INSERT INTO bbs(subject, user_name, content) 
+		VALUES(#{subject}, #{user_name}, #{content})
+	</insert>
+	<!-- photo 테이블 -->
+	<insert id="savePhoto">
+		INSERT INTO photo(ori_filename, new_filename, idx) 
+		VALUES(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	
+	<!-- 글 삭제 -->
+	<!-- 글에 파일이 있다면, 파일명 추출 -->
+	<select id="getFileName" resultType="String">
+		SELECT new_filename FROM photo WHERE idx = #{param1}
+	</select>
+	<!-- bbs 삭제 on delete cascade photo! -->
+	<delete id="del">
+		DELETE FROM bbs WHERE idx = #{param1}
+	</delete>
+
+	
+</mapper>
