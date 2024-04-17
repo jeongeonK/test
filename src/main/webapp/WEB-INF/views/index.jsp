@@ -15,21 +15,11 @@
 	<p>1. 브랜치 초기화 - 특정 지점까지 초기화 하는 기능</p>
 	<p>2.reverse commit</p>
 	<p>불필요한 내용</p>
+	<button>클릭해 주세요</button>
 </body>
 
 <script>
-	var msg = '${msg}';
-	if (msg != '') {
-		alert(msg);
-	}
 
-	function login() {
-		$('form').submit();
-	}
-	
-	function join() {
-		location.href="join.go";
-	}
 	
 	
 </script>
