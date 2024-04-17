@@ -18,19 +18,7 @@
 </body>
 
 <script>
-	var msg = '${msg}';
-	if (msg != '') {
-		alert(msg);
-	}
-
-	function login() {
-		$('form').submit();
-	}
-	
-	function join() {
-		location.href="join.go";
-	}
-	
+	var arr =[];
 	
 </script>
 </html>
