@@ -19,8 +19,16 @@
 </body>
 
 <script>
+<<<<<<< HEAD
 
+=======
+	var arr =[];
+	var obj = {};
+>>>>>>> 신규개발
 	
+	function test(){
+		alert('test입니다.');
+	};
 	
 </script>
 </html>
