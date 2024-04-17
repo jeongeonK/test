@@ -10,33 +10,10 @@
 </style>
 </head>
 
-<body>
-	<div class="top-div"></div>
-	
-	<div class="subject-div">
-		<h3>로그인 페이지</h3>
-	</div>
-	
-	<div class="table-div">
-		<form action="login.do" method="post">
-			<table>
-				<tr>
-					<th>ID</th>
-					<td><input type="text" name="id" /></td>
-				</tr>
-				<tr>
-					<th>PW</th>
-					<td><input type="text" name="pw" /></td>
-				</tr>
-				<tr>
-					<th colspan="2">
-						<input type="button" onclick="login()" value="로그인">
-						<input type="button" onclick="join()" value="회원가입">
-					</th>
-				</tr>
-			</table>
-		</form>
-	</div>
+<body>	
+	<h3>commit한 내용을 취소하고 싶다면</h3>
+	<p>1. 브랜치 초기화</p>
+	<p>2.reverse commit</p>
 </body>
 
 <script>
